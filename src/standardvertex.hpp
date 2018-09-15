@@ -1,5 +1,3 @@
-
-
 struct StandardVertex
 {
   float x, y, z;        //Vertex

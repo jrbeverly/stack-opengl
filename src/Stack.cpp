@@ -1,4 +1,5 @@
-#include "A1.hpp"
+#include "Stack.hpp"
+
 #include "cs488-framework/GlErrorCheck.hpp"
 #include "cs488-framework/OpenGLImport.hpp"
 
@@ -24,7 +25,7 @@ static const float SCALE_UPPER = 2.0f;
 
 //----------------------------------------------------------------------------------------
 // Constructor
-A1::A1()
+Stack::Stack()
 : current_col( 0 ),
 m_grid( DIM )
 {
@@ -35,7 +36,7 @@ m_grid( DIM )
 
 //----------------------------------------------------------------------------------------
 // Destructor
-A1::~A1()
+Stack::~Stack()
 {
 
 }
@@ -66,7 +67,7 @@ float math_clamp(float value, float low, float high)
 /*
 * Called once, at program start.
 */
-void A1::init()
+void Stack::init()
 {
     // Set the background colour.
     glClearColor( 0.3, 0.5, 0.7, 1.0 );
@@ -103,7 +104,7 @@ void A1::init()
 
 //----------------------------------------------------------------------------------------
 // Initializes the state of the application to the default values
-void A1::initState()
+void Stack::initState()
 {
     // Initializes the grid colours (RGB)
     grid_colours[0] = vec3(1.0f, 0.0f, 0.0f);     // Red
@@ -139,7 +140,7 @@ void A1::initState()
 }
 
 // Initializes the grid of the application
-void A1::initGrid()
+void Stack::initGrid()
 {
     size_t vcount = 3 * 2 * 2 * (DIM + 3);
 
@@ -188,7 +189,7 @@ void A1::initGrid()
 
 //----------------------------------------------------------------------------------------
 // Initializes the cube vertex and index data
-void A1::initCube()
+void Stack::initCube()
 {
     // Vertices that define the cube
     size_t vcount = 8;
@@ -246,7 +247,7 @@ void A1::initCube()
 /*
 * Called once per frame, before guiLogic().
 */
-void A1::appLogic()
+void Stack::appLogic()
 {
     // Place per frame, application logic here ...
 }
@@ -255,13 +256,13 @@ void A1::appLogic()
 /*
 * Called once per frame, after appLogic(), but before the draw() method.
 */
-void A1::guiLogic()
+void Stack::guiLogic()
 {
     // We already know there's only going to be one window, so for
     // simplicity we'll store button states in static local variables.
     // If there was ever a possibility of having multiple instances of
-    // A1 running simultaneously, this would break; you'd want to make
-    // this into instance fields of A1.
+    // Stack running simultaneously, this would break; you'd want to make
+    // this into instance fields of Stack.
     static bool showTestWindow(false);
     static bool showDebugWindow(true);
 
@@ -344,7 +345,7 @@ void A1::guiLogic()
 /*
 * Called once per frame, after guiLogic().
 */
-void A1::draw()
+void Stack::draw()
 {
     // Create a global transformation for the model (centre it).
     mat4 W;
@@ -457,7 +458,7 @@ void A1::draw()
 /*
 * Called once, after program is signaled to terminate.
 */
-void A1::cleanup()
+void Stack::cleanup()
 {
     glDeleteBuffers(1, &m_grid_vbo);
 
@@ -469,7 +470,7 @@ void A1::cleanup()
 /*
 * Event handler.  Handles cursor entering the window area events.
 */
-bool A1::cursorEnterWindowEvent (int entered) {
+bool Stack::cursorEnterWindowEvent (int entered) {
     bool eventHandled(false);
 
     return eventHandled;
@@ -479,7 +480,7 @@ bool A1::cursorEnterWindowEvent (int entered) {
 /*
 * Event handler.  Handles mouse cursor movement events.
 */
-bool A1::mouseMoveEvent(double xPos, double yPos)
+bool Stack::mouseMoveEvent(double xPos, double yPos)
 {
     bool eventHandled(false);
     const float degree = 0.1f;
@@ -500,7 +501,7 @@ bool A1::mouseMoveEvent(double xPos, double yPos)
 /*
 * Event handler.  Handles mouse button events.
 */
-bool A1::mouseButtonInputEvent(int button, int actions, int mods) {
+bool Stack::mouseButtonInputEvent(int button, int actions, int mods) {
     bool eventHandled(false);
 
     isMouseDown = false;
@@ -522,7 +523,7 @@ bool A1::mouseButtonInputEvent(int button, int actions, int mods) {
 /*
 * Event handler.  Handles mouse scroll wheel events.
 */
-bool A1::mouseScrollEvent(double xOffSet, double yOffSet) {
+bool Stack::mouseScrollEvent(double xOffSet, double yOffSet) {
     bool eventHandled(true);
     const float degree = 0.05f;
 
@@ -539,7 +540,7 @@ bool A1::mouseScrollEvent(double xOffSet, double yOffSet) {
 /*
 * Event handler.  Handles window resize events.
 */
-bool A1::windowResizeEvent(int width, int height) {
+bool Stack::windowResizeEvent(int width, int height) {
     bool eventHandled(false);
 
     return eventHandled;
@@ -549,7 +550,7 @@ bool A1::windowResizeEvent(int width, int height) {
 /*
 * Event handler.  Handles key input events.
 */
-bool A1::keyInputEvent(int key, int action, int mods) {
+bool Stack::keyInputEvent(int key, int action, int mods) {
     bool eventHandled(false);
     int moveXAxis(0);
     int moveYAxis(0);
@@ -645,7 +646,7 @@ bool A1::keyInputEvent(int key, int action, int mods) {
 /*
 * Decreases the height of the specified cell.
 */
-void A1::decrementCell(int cellX, int cellY){
+void Stack::decrementCell(int cellX, int cellY){
     // Get the new height of the cell
     int height = m_grid.getHeight(cellX, cellY) - 1;
     height = math_clamp(height, 0, MAX_HEIGHT);
@@ -659,7 +660,7 @@ void A1::decrementCell(int cellX, int cellY){
 /*
 * Increases the height of the specified cell.
 */
-void A1::incrementCell(int cellX, int cellY){
+void Stack::incrementCell(int cellX, int cellY){
     // Get the new height of the cell
     int height = m_grid.getHeight(cellX, cellY) + 1;
     height = math_clamp(height, 0, MAX_HEIGHT);
@@ -673,7 +674,7 @@ void A1::incrementCell(int cellX, int cellY){
 /*
 * Copies the properties of the specified cell.
 */
-void A1::copyCell(int sourceX, int sourceY, int destX, int destY){
+void Stack::copyCell(int sourceX, int sourceY, int destX, int destY){
     // Get source cell details
     int srcHeight = m_grid.getHeight(sourceX, sourceY);
     int srcColour = m_grid.getColour(sourceX, sourceY);
@@ -687,7 +688,7 @@ void A1::copyCell(int sourceX, int sourceY, int destX, int destY){
 /*
 * Sets the active cell of the application.
 */
-void A1::setActiveCell(int cellX, int cellY) {
+void Stack::setActiveCell(int cellX, int cellY) {
     grid_pos_x = cellX;
     grid_pos_y = cellY;
 }

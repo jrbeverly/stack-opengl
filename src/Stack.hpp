@@ -8,10 +8,10 @@
 
 #include "grid.hpp"
 
-class A1 : public CS488Window {
+class Stack : public CS488Window {
 public:
-	A1();
-	virtual ~A1();
+	Stack();
+	virtual ~Stack();
 
 protected:
 	virtual void init() override;
