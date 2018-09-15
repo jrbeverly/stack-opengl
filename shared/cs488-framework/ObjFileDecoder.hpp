@@ -2,11 +2,8 @@
 
 #include <glm/glm.hpp>
 #include <vector>
-<<<<<<< HEAD
-=======
 #include <string>
 #include <cstring>
->>>>>>> 47fa8bab784c4dfcebd3f3b00d7a5cd961283791
 
 class ObjFileDecoder {
 public:
