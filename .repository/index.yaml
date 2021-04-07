@@ -1,0 +1,17 @@
+slug: stack-opengl
+description: 'stack-opengl is a variant of stack-net written in OpenGL. '
+project: uwaterloo
+namespace:
+status: archived
+icon: icon.svg
+license:
+  type: MIT
+  content: Jonathan Beverly <jrbeverly>
+  year: 2017
+topics: |-
+  [
+    "blocks",
+    "opengl",
+    "simple",
+    "stacking"
+  ]
